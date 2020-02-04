@@ -1,6 +1,13 @@
 
             body {
-                background-color: lightblue;
+                background-color: darkblue;
+                color: white;
+            }
+            main, footer {
+                border: 1px solid black;
+                margin: 0 auto;
+                width: 80vw;
+                padding: 1vw;
             }
             h1 { 
                 color:red;
@@ -15,7 +22,7 @@
                 margin-left: 100px;
             }
             blockquote { 
-                background-color: lightgray;
+                background-color: gray;
                 padding: 1rem;
             }
             img{
@@ -24,4 +31,7 @@
             img.side{
                 float: right;
                 margin: 0 12px;
+            }
+            footer {
+                background-color: gray;
             }
