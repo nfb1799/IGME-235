@@ -1,0 +1,28 @@
+h1, h2, h3, h4, h5, h6 {
+    border-bottom: 2px red;
+}
+figure {
+    float: right;
+    width: 40vw;
+}
+figure img {
+    width: 40vw;
+}
+h2 {
+    clear: both;
+}
+div.tet{
+    display: flex;
+    width: 650px;
+    flex-flow: row wrap;
+    margin: auto;
+    flex: 1, 0, 450px;
+    border: 1px solid black;
+}
+header, main, footer {
+    margin: auto;
+    width: 45vw;
+}
+img {
+    width: 30vw;
+}

@@ -1,0 +1,104 @@
+/**************************************
+General Formatting (Leave This Alone!)
+**************************************/
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    /* sets base font size for rem sizing */
+    font-size: 16px;
+    font-family: Calibri, Helvetica, Arial, sans-serif;
+}
+
+html,
+body {
+    margin: 0;
+}
+
+header,
+footer {
+    /* centers header and footer content horizontally and vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #86af49;
+}
+
+nav,
+aside,
+article {
+    padding: .5rem;
+}
+
+nav, aside {
+    background-color: #b5e7a0;
+    border: 1px dotted black; 
+}
+
+/*****************
+Grid Formatting  
+*****************/
+
+#wrapper {
+    display: grid;
+    height: 100vh;
+    grid-template-areas: 
+        "header"
+        "sidenav"
+        "article"
+        "sidebar"
+        "footer";
+    grid-template-rows: 1fr 2fr 10fr 2fr 1fr;
+}
+
+header {
+    grid-area: header;
+}
+
+nav {
+    grid-area: sidenav;
+}
+
+article {
+    grid-area: article;
+}
+
+aside {
+    grid-area: sidebar;
+}
+
+footer {
+    grid-area: footer;
+}
+
+@media (min-width: 760px) {
+    #wrapper {
+        grid-template-areas: 
+            "header header header"
+            "sidenav article sidebar"
+            "footer footer footer";
+        grid-template-rows: 1fr 10fr 1fr;
+        grid-template-columns: 20% auto 20%;
+    }
+    header {
+        grid-area: header;
+    }
+    
+    nav {
+        grid-area: sidenav;
+    }
+    
+    article {
+        grid-area: article;
+    }
+    
+    aside {
+        grid-area: sidebar;
+    }
+    
+    footer {
+        grid-area: footer;
+    }
+}
