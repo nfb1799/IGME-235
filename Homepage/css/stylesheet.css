@@ -2,15 +2,16 @@ body {
     margin: 0 0;
 }
 #container {
-    
+    font-family: 'Kelly Slab', cursive;
 }
 #header {
     width: 99.6%;
-    height: auto;
-    padding: .2%;
+    height: 9.5vh;
+    padding: .1%;
     text-align: center;
     border-bottom: 2px solid black;
-    background-color: blue;
+    background-color: #27496d;
+    color: white;
 }
 #nav {
     box-sizing: border-box;
@@ -19,7 +20,7 @@ body {
     width: 15%;
     padding: .5em;
     border-right: 2px solid black;
-    background-color: blueviolet;
+    background-color: #0c7b99;
 }
 #main{
     box-sizing: border-box;
@@ -28,16 +29,18 @@ body {
     width: 85%;
     margin: 0 0;
     padding-left: 1em;
-    background-color: green;
+    background-color: #00A8CC;
 }
 #footer{
     box-sizing: border-box;
     float: inline-end;
     padding: .5em;
+    height: 9.8vh;
     width: 100%;
-    border-top: 4px solid black;
+    border-top: 2px solid black;
     margin-left: 2em;
-    background-color: white;
+    background-color: #142850;
+    color: white;
 }
 img {
     float: left;
@@ -48,4 +51,19 @@ img {
 }
 p{
     width: 40vw;
+}
+a:link, a:visited {
+    color: #142850;
+}
+a:hover {
+    color: white;
+}
+a:active {
+    color: #00A8CC;
+}
+ul {
+    list-style-image: url('../images/swirl.png');
+}
+li {
+    margin: 5vh 0;
 }
