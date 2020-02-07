@@ -1,0 +1,23 @@
+body {
+    margin: 0 auto;
+}
+header {
+    text-align: center;
+    background-color: blue;
+    height: 100%;
+}
+nav, main {
+    margin-top: none;
+}
+nav {
+    float: left;
+    width: 15vw;
+    height: 90vh;
+    background-color: blueviolet;
+}
+main{
+    background-color: yellow;
+}
+footer{
+    background-color: white;
+}
