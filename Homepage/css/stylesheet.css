@@ -8,6 +8,7 @@ body {
 #container {
     font-family: 'Kelly Slab', cursive;
     display: grid;
+    border-top: 2px solid black;
     grid-template-columns: 15% 85%;
     height: 100%;
 }
@@ -17,7 +18,6 @@ body {
 }
 #header {
     text-align: center;
-    border-bottom: 2px solid black;
     background-color: #27496d;
     color: white;
 }
@@ -28,7 +28,8 @@ body {
 }
 #main{
     margin: 0 0;
-    padding-left: 1em;
+    padding-top: 5vh;
+    padding-left: 5vw;
     background-color: #00A8CC;
 }
 #footer{
@@ -39,13 +40,14 @@ body {
 }
 img {
     float: left;
-    margin-right: 1em;
+    margin-right: 2em;
     border-radius: 80px;
-    width: 20%;
-    height: 20%;
+    width: 30%;
+    height: 30%;
 }
 p{
-    width: 40vw;
+    line-height: 2.5em;
+    width: 50vw;
 }
 a:link, a:visited {
     color: #142850;
