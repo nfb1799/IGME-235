@@ -1,0 +1,66 @@
+body {
+    margin: 0 0;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+    width: 100%;
+    height: 100vh;
+}
+#container {
+    font-family: 'Kelly Slab', cursive;
+    display: grid;
+    border-top: 2px solid black;
+    grid-template-columns: 15% 85%;
+    height: 100%;
+}
+#header, #footer {
+    height: 100%;
+    padding: 1em;
+}
+#header {
+    text-align: center;
+    background-color: #27496d;
+    color: white;
+}
+#nav {
+    padding: .5em;
+    border-right: 2px solid black;
+    background-color: #0c7b99;
+}
+#main{
+    margin: 0 0;
+    padding-top: 5vh;
+    padding-left: 5vw;
+    background-color: #00A8CC;
+}
+#footer{
+    border-top: 2px solid black;
+    background-color: #142850;
+    color: white;
+    line-height: 1.5rem;
+}
+img {
+    float: left;
+    margin-right: 2em;
+    border-radius: 80px;
+    width: 30%;
+    height: 30%;
+}
+p{
+    line-height: 2.5em;
+    width: 50vw;
+}
+a:link, a:visited {
+    color: #142850;
+}
+a:hover {
+    color: white;
+}
+a:active {
+    color: #00A8CC;
+}
+ul {
+    list-style-image: url('../images/swirl.png');
+}
+li {
+    margin: 5vh 0;
+}
