@@ -1,7 +1,7 @@
 .grid {
     display: grid;
-    width: 60vw;
-    grid-template-rows: 10vh 30vh auto 10vh;
+    width: 100vw;
+    grid-template-rows: 5rem 1fr 2fr 5rem;
     grid-template-areas: 
         "header"
         "people"
@@ -9,16 +9,42 @@
         "footer";
     justify-items: center;
 }
-img {
-    width: 60vw;
-}
 .header, .footer {
     background-color: #2e3532;
-    width: 60vw;
+    color: #e0e2db;
+    width: 80vw;
+}
+.header {
+    display: flex;
+    align-content: space-between;
+}
+.people img {
+    width: 80vw;
+    height: 100%;
 }
 .subgrid {
     background-color: #e0e2db;
+    width: 76vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 3fr 2fr;
+    grid-template-areas: 
+        "first second third fourth"
+        "design design program program";
+    grid-gap: 1rem;
+    padding: 2rem;
 }
-.subgrid p {
+.subgrid div {
     background-color: #d2d4c8;
+}
+.subgrid img {
+    width: 100%;
+}
+.subgrid h2, p {
+    padding: 0 1rem;
+}
+#design, #program {
+    background-color: #bc0c06;
+    color: #e0e2db;
+    grid-column: span 2;
 }
