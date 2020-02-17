@@ -1,0 +1,22 @@
+#header, #footer{
+    background-color: #2e3532;
+    color: #e0e2db;
+}
+header{
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 3fr;
+}
+header a{
+    justify-content: flex-end;
+}
+#grid{
+    background-color: #e0e2db;
+}
+#aspects{
+    background-color: #d2d4c8;
+    color: #13295c;
+}
+#design, #programming{
+    background-color: #bc0c06;
+    color: #e0e2db;
+}
