@@ -81,9 +81,6 @@ ul.menu li:hover ul {
     grid-template-columns: repeat(6, 100px);
     grid-template-rows: repeat(6, 100px);
 }
-div.tet {
-    overflow: visible;
-}
 #o {
     grid-column: 1/3;
     grid-row: 1/span 2;
@@ -91,6 +88,18 @@ div.tet {
 #i {
     grid-column: 3/-1;
     grid-row: span 1;
+}
+#j {
+    transform: translateX(205px) translateY(105px) rotate(180deg);
+}
+#l {
+    transform: translateX(205px) translateY(5px) rotate(180deg);
+}
+#s {
+    transform: translateY(100px);
+}
+#t {
+    transform: translateX(200px) translateY(100px);
 }
 #z img {
     transform: translateX(205px) rotate(90deg);
