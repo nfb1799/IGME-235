@@ -13,10 +13,27 @@
     background-color: #2e3532;
     color: #e0e2db;
     width: 80vw;
+    font-family: Arial Rounded MT Bold;
+}
+a {
+    color: #e0e2db;
+    text-decoration: none;
+}
+a:hover {
+    color: #bc0c06;   
 }
 .header {
-    display: flex;
-    align-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(4, auto);
+}
+.header img {
+    width: 4rem;
+    height: 4rem;
+    margin-left: 2.5rem;
+}
+#menu {
+    text-align: center;
+    padding-right: 1em;
 }
 .people img {
     width: 80vw;
@@ -31,8 +48,10 @@
     grid-template-areas: 
         "first second third fourth"
         "design design program program";
-    grid-gap: 1rem;
+    grid-gap: 2rem;
     padding: 2rem;
+    font-family: Arial;
+    font-size: 1.3em;
 }
 .subgrid div {
     background-color: #d2d4c8;
@@ -47,4 +66,22 @@
     background-color: #bc0c06;
     color: #e0e2db;
     grid-column: span 2;
+    padding: 1rem;
+}
+#red {
+    margin-bottom: 3rem;
+}
+.footer {
+    display: grid;
+    grid-template-columns: auto auto;
+    font-size: 1.2em;
+}
+.footer #copyright {
+    padding: 1rem;
+    padding-left: 3rem;
+}
+.footer #info {
+    padding: 1rem;
+    padding-right: 3rem;
+    text-align: end;
 }
