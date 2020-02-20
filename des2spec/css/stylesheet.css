@@ -31,7 +31,7 @@ a:hover {
     height: 4rem;
     margin-left: 2.5rem;
 }
-#menu {
+.menu {
     text-align: center;
     padding-right: 1em;
 }
@@ -41,6 +41,7 @@ a:hover {
 }
 .subgrid {
     background-color: #e0e2db;
+    color: #2e3532;
     width: 76vw;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -68,7 +69,7 @@ a:hover {
     grid-column: span 2;
     padding: 1rem;
 }
-#red {
+.red {
     margin-bottom: 3rem;
 }
 .footer {
