@@ -71,6 +71,9 @@ h2{
     grid-template-columns: 1fr 1fr;
     justify-items: center;
 }
+h2.desc{
+    font-size: 2rem;
+}
 .work {
     padding-left: 1rem;
     height: 100%;
@@ -110,8 +113,10 @@ footer{
 #edu{
     text-align: end;
 }
-a{
+.social a{
     color: #C5C6C7;
+    display: flex;
+    justify-content: center;
 }
 a:link, a:visited{
     color: #C5C6C7;
@@ -123,6 +128,10 @@ a:hover, a:focus{
 a:active{
     background: #C5C6C7;
 }
+a img{
+    width: 75%;
+    height: 75%;
+}
 iframe{
     display: flex;
     width: 90%;
@@ -130,7 +139,7 @@ iframe{
     justify-self: center;
     align-self: center;
 }
-@media only screen and (max-width: 650px){
+@media only screen and (max-width: 768px){
     header{
         display: grid;
         grid-template-columns: 1fr;
@@ -151,8 +160,11 @@ iframe{
     }
     #about, .project{
         grid-template-columns: 1fr;
-        grid-template-rows: .75fr auto auto;
+        grid-template-rows: 45vh auto auto;
         width: 100%;
+    }
+    .project{
+        margin-top: 1rem;
     }
     #self{
         grid-row-start: 1;
@@ -161,7 +173,9 @@ iframe{
     #about h2{
         display: flex;
         justify-self: center;
+        text-align: center;
         font-size: 1.2rem;
+        margin-top: .5rem;
     }
     #about p{
         font-size: 1rem;
@@ -170,23 +184,27 @@ iframe{
         font-size: 1rem;
     }
     .work{
-        height: 50%;
-        width: 50%;
+        grid-row-start: 1;
+        height: 45vh;
+        width: 80vw;
         padding: 0;
-        align-self: center;
     }
     h2.desc{
         margin: 0;
     }
     p.desc{
         padding: .5rem;
+        height: 100%;
         margin: 0;
     }
     #contact{
         width: 90vw;
         padding: .5rem;
+        margin-top: 1rem;
+        margin-bottom: .5rem;
         justify-self: center;
         grid-column-gap: 1rem;
+        border-top: 2px solid black;
     }
     .social{
         padding-left: 1rem;
@@ -194,5 +212,12 @@ iframe{
     a img{
         width: 80%;
         height: 80%;
+    }
+    footer{
+        font-size: .8rem;
+        grid-template-columns: 1fr;
+    }
+    #edu{
+        display: none;
     }
 }
