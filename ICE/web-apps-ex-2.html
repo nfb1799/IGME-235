@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>DOM-3</title>
+	<style>
+		body{border:1px solid gray;}
+		p b{transform: rotate(20deg)}
+	</style>
+</head>
+<body>
+<h1>My Page</h1>
+<h2>Info</h2>
+<h2>Pictures</h2>
+<h2>More Info</h2>
+<p>Blah <b>Blah</b> Blah</p>
+<p>Blah <b>Blah</b> Blah</p>
+<p id="lastParagraph">Blah <b>Blah</b> Blah</p>
+<footer>Copyright &copy; <b>20XX</b></footer>
+<script>
+	"use strict"; 
+  
+    let h1 = document.querySelector("h1");
+    h1.innerHTML = "My UFO Page";
+
+    let h2All = document.querySelectorAll("h2");
+    let h2 = h2All[0];
+    h2.innerHTML = "My UFO Info";
+    h2 = h2All[1];
+    h2.innerHTML = "My UFO Pictures";
+    h2 = h2All[2];
+    h2.innerHTML = "";
+
+    document.body.style.fontFamily = "sans-serif";
+    document.body.style.color = "red";
+
+    let p = document.querySelector("p");
+    p.innerHTML = "Report your UFO sightings here: <a href='http://www.nuforc.org'>nuforc.org</a>";
+    p.style.color = "green";
+    p.style.fontWeight = "bold";
+    p.style.fontSize = "2em";
+    p.style.textTransform = "uppercase";
+    p.style.textShadow = "3px 2px #A44";
+
+    let pAll = document.querySelectorAll("p");
+    p = pAll[1];
+    p.innerHTML = "";
+    p = pAll[2];
+    p.innerHTML = "<img src='https://www.history.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_960/MTYwNjk5ODI4NzQ4MTY3MTQz/project-blue-book-ufo-stories-hero-getty845718658.jpg' alt = 'A UFO'>";
+    
+    let footer = document.querySelector("footer");
+    footer.innerHTML = "&copy 2020 Nik Barbero";
+	
+	</script>
+</body>
+</html>
