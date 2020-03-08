@@ -51,7 +51,7 @@ nav a{
     justify-items: center;
     align-items: center;
     grid-template-rows: auto auto;
-    background-image: url("../media/stars2.jpeg");
+    background-image: url("../media/stars3.jpg");
 }
 h2{
     display: flex;
