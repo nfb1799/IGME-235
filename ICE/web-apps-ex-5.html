@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Web Apps-6</title>
+	<style>
+		body{
+			font-family:sans-serif;
+		}
+		#colorform{
+			background-color:#dfecdf;
+			color: #111;
+			padding:1em;width:400px;
+		}
+		#colorform p#info{
+			background-color:white;
+			color: black;
+			width:300px;
+			height:100px;
+			padding:.5em;
+		}
+		
+		#colorform legend{ 
+			font-weight:bold;
+			font-size:1.2em;
+		}
+	</style>
+</head>
+<body>
+
+<div id="colorform">
+	<legend>Choose your favorite color!</legend>
+	<p><input type="radio" name="colorGroup" id="colorGroup" value="red" /> Red</p>
+	<p><input type="radio" name="colorGroup" id="colorGroup" value="green" /> Green</p>
+	<p><input type="radio" name="colorGroup" id="colorGroup" value="blue" /> Blue</p>
+	<p><button id="colorButton" type="button">Submit</button></p>
+	<p id="info"></p>
+</div>
+
+<script>
+
+    let colorButton = document.querySelector("#colorButton");
+    let radioButtons = document.querySelectorAll("#colorGroup");
+    let infoP = document.querySelector("#info");
+
+    colorButton.onclick = submitClicked;
+
+    for(radio of radioButtons) {
+        radio.onchange = radioChanged;
+    }
+
+    function radioChanged(e) {
+        let value = e.target.value;
+        infoP.innerHTML = "You have selected \"" + value + "\"!";
+    }
+
+    function submitClicked(e) {
+        for(radio of radioButtons) {
+            if(radio.checked) {
+                let value = radio.value;
+                infoP.innerHTML = "Your FINAL CHOICE is \"" + value + "\"!";
+                document.querySelector("legend").style.color = value;
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

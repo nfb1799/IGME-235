@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Bitter&display=swap" rel="stylesheet">
+	<title>Web Apps-4-HW</title>
+	<style>
+        body{   background-image: url('images/background.jpeg'); 
+                font-family: 'Bitter', serif; 
+                text-align: center;
+                display: grid;
+                height: 98vh;
+                grid-template-rows: 1fr 1fr 6fr .5fr    
+            }
+        p{font-size: 8rem;}
+        footer{margin-bottom: 1rem;}
+	</style>
+</head>
+<body>
+<header><h1>Web Apps-4-HW</h1></header>
+
+<h2>Random Phrase:</h2>
+<p id="phrases"></p>
+
+<footer>&copy; 2020 Nik Barbero</footer>
+<script>
+"use strict";
+
+let phrases = ["Knock Your Socks Off", "A Dime a Dozen", "Talk the Talk", 
+                "Like Father Like Son", "I Smell a Rat"];
+
+let ranPhrase = document.querySelector("#phrases");
+ranPhrase.innerHTML = phrases[Math.floor(Math.random() * phrases.length)];
+</script>
+</body>
+</html>
