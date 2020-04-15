@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Bitter&display=swap" rel="stylesheet">
+	<title>Web Apps-5-HW</title>
+	<style>
+        body{   
+            background-image: url('images/background.jpeg'); 
+            font-family: 'Bitter', serif; 
+            text-align: center;
+            display: grid;
+            height: 98vh;
+            grid-template-rows: 1fr 1fr 3fr 3fr .5fr;   
+            align-items: center;
+        }
+        #phrases{
+            font-size: 8rem; 
+            margin: 0;
+        }
+        #phraseButton{
+            border: 2px solid transparent;
+            border-radius: 20em;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1;
+            margin: 18px;
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            display:inline-block;
+            outline:none;
+            position:relative;
+            top:0;
+            text-shadow:0 1px 1px rgba(0, 0, 0, 0.5);
+            background:black;
+	        color:#fff;
+            box-shadow: 0 3px 0 #a3aaaf;
+        }
+        #phraseButton:hover{font-weight: 900;}
+        #phraseButton:active{background: gray;}
+        footer{margin-bottom: 1rem;}
+	</style>
+</head>
+<body>
+<header><h1>Web Apps-5-HW</h1></header>
+
+<h2>Random Phrase:</h2>
+<p id="phrases"></p>
+<p><button id="phraseButton" class="dark-blue" type="button">New Phrase</button></p>
+
+<footer>&copy; 2020 Nik Barbero</footer>
+<script>
+
+let phrases = ["Knock Your Socks Off", "A Dime a Dozen", "Talk the Talk", 
+                "Like Father Like Son", "I Smell a Rat"];
+
+let ranPhrase = document.querySelector("#phrases");
+ranPhrase.innerHTML = phrases[Math.floor(Math.random() * phrases.length)];
+
+let phraseButton = document.querySelector("#phraseButton");
+phraseButton.onclick = displayQuote;
+
+function displayQuote(e) {
+    ranPhrase.innerHTML = phrases[Math.floor(Math.random() * phrases.length)];
+}
+</script>
+</body>
+</html>
