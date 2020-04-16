@@ -1,144 +1,332 @@
-// 1
+// Load all parts of the script when the window loads
 window.onload = (e) => { 
+    loadTrending();
+    loadRandom();
+    document.querySelector("#searchterm").value = localStorage.getItem(prevSearch);
     document.querySelector("#search").onclick = searchButtonClicked; 
-    document.querySelector("#load").onclick = loadMore;
+    document.querySelector("#next").onclick = loadNext;
+    document.querySelector("#prev").onclick = loadPrev;
+    document.querySelector("#rand").onclick = loadRandom;
 };
 
-// 2
+// Initialize necessary global variables
 let displayTerm = "";
-let limit = 0;
-let offset = 0;
+let page = 0;
+let randomOffset = 0;
+let prevSearch = "";
+let searched = false;
+const LIMIT = 5;
 const GIPHY_KEY = "4BvFmT5pYuHTD7CPbDNSDL1CZHowPU6b";
 
-function loadMore(e){
-    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
-    let url = GIPHY_URL;
-    url += "api_key=" + GIPHY_KEY;
-    let term = document.querySelector("#searchterm").value;
-    displayTerm = term;
-    term = term.trim();
-    term = encodeURIComponent(term);
-    if (term.length < 1) return;
-    url += "&q=" + term;
-    let limit = document.querySelector("#limit").value;
-    url += "&limit=" + limit;
-    console.log(offset);
-    url += "&offset=" + offset;
-    document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
-    getData(url);
-}
-
-// 3
+// Called whenever the search button is clicked
 function searchButtonClicked() {
-    console.log("searchButtonClicked() called");
 
-    //1
+    // Reset the page number for new searches
+    page = 0;
+
+    // Begin building the URL
     const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
 
-    //2
-    //Public API key from here: https://developers.giphy.com/docs/
-    //If this one no longer works, get your own (it's free!)
-
-    //3 - build up our URL string
+    
+    // Append the api key to the URL
     let url = GIPHY_URL;
     url += "api_key=" + GIPHY_KEY;
 
-    //4 - parse the user entered term we wish to search
+    // Parse the user entered term we wish to search
     let term = document.querySelector("#searchterm").value;
+    localStorage.setItem(prevSearch, term);
     displayTerm = term;
 
-    //5 - get rid of any leading and trailing spaces
+    // Get rid of any leading and trailing spaces
     term = term.trim();
 
-    //6 - encode spaces and specials characters
+    // Encode spaces and specials characters
     term = encodeURIComponent(term);
 
-    //7 - if there's no term to search then bail out of the function ( return does this)
+    // If there's no term to search then return
     if (term.length < 1) return;
 
-    //8 - append the search term to the URL - the parameter name is 'q'
+    // Append the search term to the URL
     url += "&q=" + term;
 
-    //9 - grab the user chosen search 'limit' from the <select> and append it to the URL 
-    let limit = document.querySelector("#limit").value;
-    url += "&limit=" + limit;
+    // Append the limit to the URL - always 5 
+    url += "&limit=" + LIMIT;
 
-    //10 - update the UI
+    // Append the rating to the URL
+    let rating = document.querySelector("#rating").value;
+    url += "&rating=" + rating;
+
+    console.log(url);
+    // Update the status to show the current state
     document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
 
-    //11 - see what the URL looks like
-    console.log(url);
-
-    //12 - request data
+    // Call the getData() function with the complete URL
     getData(url);
 
 
 }
 
 function getData(url) {
-    //1 - create a new XHR object
+    // Create a new XHR object
     let xhr = new XMLHttpRequest();
 
-    //2 - set the onload handler
+    // Set the onload handler
     xhr.onload = dataLoaded;
 
-    //3 - set the onerror handler
+    // Set the onerror handler
     xhr.onerror = dataError;
 
-    //4 - open connection and send the request
+    // Open connection and send the request
     xhr.open("GET", url);
     xhr.send();
 }
 
-//Callback Functions
+// Callback Functions
 function dataLoaded(e) {
-    //5 - event.target is the xhr object
+    // Toggle the searched boolean
+    searched = true;
+
+    // e.target is the xhr object
     let xhr = e.target;
 
-    //6 - xhr.responseText is the JSON file we just downloaded
-    console.log(xhr.responseText);
-
-    //7 - turn the text into a parsable JavaScript object
+    // Turn the text into a parsable JavaScript object
     let obj = JSON.parse(xhr.responseText);
 
-    //8 - if there are no results, print a message and return
+    // If there are no results, print a message and return
     if (!obj.data || obj.data.length == 0) {
-        document.querySelector("#status").innerHTML = "<b>No results for for '" + displayTerm + "'</b>";
+        document.querySelector("#status").innerHTML = "<b>No results for '" + displayTerm + "'</b>";
         return; //Bail out
     }
 
-    //9 - start building an HTML string we will display to the user
+    // Start building an HTML string we will display to the user
     let results = obj.data;
-    console.log("results.length = " + results.length);
-    let bigString = "<p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+    let bigString = "<p id='print'><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
 
-    //10 - loop through the array of results
-    for (let i = 0; i < results.length; i++) {
+    // Loop through the array of results
+    for (let i = 0; i < LIMIT; i++) {
         let result = results[i];
 
-        //11 - get the URL to the GIF
+        // Get the URL to the GIF
+        let smallURL = result.images.fixed_height_downsampled.url;
+        if (!smallURL) smallURL = "images/no-image-found.png";
+
+        // Get the URL to the GIPHY page
+        let url = result.url;
+
+        // Build a <div> to hold each result
+        let line = `<div class='result'><img src='${smallURL}' title='${result.id}' />`;
+        line += `<span><a target='_blank' href='${url}'>View on Giphy</a></span></div>`;
+
+        // Add the <div> to `bigString` and loop
+        bigString += line;
+    }
+    
+    // Add the page number to `bigString`
+    bigString += `<p id="page">Page number: ${page+1}</p>`;
+
+    // All done building the HTML - show it to the user!
+    document.querySelector("#content").innerHTML = bigString;
+
+    // Update the status to show the current state
+    document.querySelector("#status").innerHTML = "<b>Success!</b>";
+}
+
+function loadNext(e){
+
+    // Restricted from loading next before the original search
+    if(!searched) {
+        // Update the status to display the current state
+        document.querySelector("#status").innerHTML = "<b>No results yet!</b>";
+    } else {
+        // Increment the page number
+        page++;
+
+        // Rebuild the url using the api key
+        const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
+        let url = GIPHY_URL;
+        url += "api_key=" + GIPHY_KEY;
+
+        // Grab the search term and encode it to add to the url
+        let term = document.querySelector("#searchterm").value;
+        displayTerm = term;
+        term = term.trim();
+        term = encodeURIComponent(term);
+
+        // If there is no term, return. Else add the term to the url
+        if (term.length < 1) return;
+        url += "&q=" + term;
+
+        // Grab the limit and add it to the url
+        url += "&limit=" + (LIMIT);
+
+        // Add the offset to the url - the starting index of objects returned
+        url += "&offset=" + (page * LIMIT);
+
+        // Display the search term to the user
+        document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
+
+        // Request data
+        getData(url);
+    }
+}
+
+function loadPrev(e){
+
+    // Restricted from searching for a negative offset
+    if(page > 0) {
+        // Decrement the page number
+        page--;
+
+        // Rebuild the url using the api key
+        const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
+        let url = GIPHY_URL;
+        url += "api_key=" + GIPHY_KEY;
+
+        // Grab the search term and encode it to add to the url
+        let term = document.querySelector("#searchterm").value;
+        displayTerm = term;
+        term = term.trim();
+        term = encodeURIComponent(term);
+
+        // If there is no term, return. Else add the term to the url
+        if (term.length < 1) return;
+        url += "&q=" + term;
+
+        // Grab the limit and add it to the url
+        url += "&limit=" + (LIMIT);
+
+        // Add the offset to the url - the starting index of objects returned
+        url += "&offset=" + (page * LIMIT);
+
+        // Display the search term to the user
+        document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
+        console.log("clicked");
+        // Request data
+        getData(url);
+    }
+    else {
+        // Update the status to display the current state
+        document.querySelector("#status").innerHTML = "<b>Can't go back any further!</b>";
+    }
+}
+
+function loadTrending(e) {
+
+    // Rebuild the url using the api key
+    const GIPHY_URL = "https://api.giphy.com/v1/gifs/trending?";
+    let url = GIPHY_URL;
+    url += "api_key=" + GIPHY_KEY;
+
+    // Add the limit to the URL - always 5
+    url += "&limit=" + (LIMIT);
+    console.log(url);
+
+    // Request data
+    getTrends(url);
+}
+
+function getTrends(url) {
+    // Create a new XHR object
+    let xhr = new XMLHttpRequest();
+
+    // Set the onload handler
+    xhr.onload = trendsLoaded;
+
+    // Set the onerror handler
+    xhr.onerror = dataError;
+
+    // Open connection and send the request
+    xhr.open("GET", url);
+    xhr.send();
+}
+
+function trendsLoaded(e) {
+    // e.target is the xhr object
+    let xhr = e.target;
+
+    // Turn the text into a parsable JavaScript object
+    let obj = JSON.parse(xhr.responseText);
+
+    // If there are no results, return
+    if (!obj.data || obj.data.length == 0) return;
+
+    // Start building an HTML string we will display to the user
+    let results = obj.data;
+    let bigString = "<ul>";
+
+    // Loop through the array of results
+    for (let i = 0; i < LIMIT; i++) {
+        let result = results[i];
+
+        // Get the URL to the GIF
         let smallURL = result.images.fixed_width_small.url;
         if (!smallURL) smallURL = "images/no-image-found.png";
 
-        //12 - get the URL to the GIPHY page
+        // Get the URL to the GIPHY page
         let url = result.url;
 
-        //13 - build a <div> to hold each result
-        //ES6 String Templating
-        let line = `<div class='result'><img src='${smallURL}' title='${result.id}' />`;
-        line += `<span><a target='_blank' href='${url}'>View on Giphy</a></span>`;
-        line += `<span></span>${result.rating.toUpperCase()}</div>`;
+        // Build a <li> to hold each result
+        let line = `<li><a target='_blank' href='${url}'>${result.title}</a>`;
 
-        //14 - add the <div> to `bigString` and loop
+        // Add the <li> to `bigString` and loop
         bigString += line;
-        offset += i;
     }
 
-    //15 - all done building the HTML - show it to the user!
-    document.querySelector("#content").innerHTML = bigString;
+    // Close the <ul> tag
+    bigString += "</ul>";
 
-    //16 - update the status
-    document.querySelector("#status").innerHTML = "<b>Success!</b>";
+    // Add the big string to the HTML of #trending
+    document.querySelector("#trending").innerHTML += bigString;
+}
+
+function loadRandom(e) {
+
+    // Rebuild the url using the api key and limit of 1 gif
+    const GIPHY_URL = "https://api.giphy.com/v1/gifs/random?";
+    let url = GIPHY_URL;
+    url += "api_key=" + GIPHY_KEY + "&limit=1";
+    
+    // Add the offset to the URL then incremement the offset
+    url += "&offset=" + randomOffset;
+    randomOffset++;
+    console.log(url);
+
+    // Request data
+    getRandom(url);
+}
+
+function getRandom(url) {
+    // Create a new XHR object
+    let xhr = new XMLHttpRequest();
+
+    // Set the onload handler
+    xhr.onload = randomLoaded;
+
+    // Set the onerror handler
+    xhr.onerror = dataError;
+
+    // Open connection and send the request
+    xhr.open("GET", url);
+    xhr.send();
+}
+
+function randomLoaded(e) {
+    // e.target is the xhr object
+    let xhr = e.target;
+
+    // Turn the text into a parsable JavaScript object
+    let obj = JSON.parse(xhr.responseText);
+
+    // If there are no results, return
+    if (!obj.data || obj.data.length == 0) return;
+
+    // Start building an HTML string we will display to the user
+    let result = obj.data;
+    document.querySelector("#gif").innerHTML = `<img src='${result.images.fixed_height_downsampled.url}' title='${result.id}' />`;
+    document.querySelector("#info").innerHTML = `<p>Title: ${result.title}</p><p>Rating: ${result.rating.toUpperCase()}</p>`
+
+    // Add the big string to the HTML of #trending
+    //document.querySelector("#random").innerHTML += bigString;
 }
 
 function dataError(e) {
