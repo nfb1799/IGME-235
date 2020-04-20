@@ -56,7 +56,6 @@ function searchButtonClicked() {
     let rating = document.querySelector("#rating").value;
     url += "&rating=" + rating;
 
-    console.log(url);
     // Update the status to show the current state
     document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
 
@@ -200,7 +199,6 @@ function loadPrev(e){
 
         // Display the search term to the user
         document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
-        console.log("clicked");
         // Request data
         getData(url);
     }
@@ -219,7 +217,6 @@ function loadTrending(e) {
 
     // Add the limit to the URL - always 5
     url += "&limit=" + (LIMIT);
-    console.log(url);
 
     // Request data
     getTrends(url);
@@ -289,7 +286,6 @@ function loadRandom(e) {
     // Add the offset to the URL then incremement the offset
     url += "&offset=" + randomOffset;
     randomOffset++;
-    console.log(url);
 
     // Request data
     getRandom(url);
