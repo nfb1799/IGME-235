@@ -1,6 +1,10 @@
 body {
-    background-color: #ecfcff;
+    background-color: blue;
 }
 p {
     width: 30%;
+}
+canvas {
+    display: block;
+    margin: auto;
 }
